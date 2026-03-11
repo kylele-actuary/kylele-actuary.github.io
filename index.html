@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kyle Le — Actuarial Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f9f7f4;
+      --white: #ffffff;
+      --ink: #1a1a1a;
+      --ink-light: #555;
+      --rule: #e0dbd4;
+      --accent: #b07d4a;
+      --accent-light: #f0e8de;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,247,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 5vw;
+      height: 60px;
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 60px;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8vw 6vw 8vw 8vw;
+      border-right: 1px solid var(--rule);
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-desc {
+      max-width: 420px;
+      color: var(--ink-light);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+
+    .hero-right {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 6vw;
+      gap: 1px;
+    }
+    .hero-stat {
+      border-top: 1px solid var(--rule);
+      padding: 1.4rem 0;
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .hero-stat:last-child { border-bottom: 1px solid var(--rule); }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--ink);
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    /* ── ABOUT ── */
+    section { padding: 8rem 8vw; }
+    .section-header {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+    .section-rule {
+      flex: 1; height: 1px; background: var(--rule);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6vw;
+      align-items: start;
+    }
+    .about-body { color: var(--ink-light); font-size: 0.95rem; line-height: 1.9; }
+    .about-body p + p { margin-top: 1.2rem; }
+
+    .skills-block { display: flex; flex-direction: column; gap: 1.5rem; }
+    .skill-row { border-top: 1px solid var(--rule); padding-top: 1rem; }
+    .skill-lang {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .skill-tools { font-size: 0.85rem; color: var(--ink-light); }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--white); }
+
+    .projects-list { display: flex; flex-direction: column; gap: 0; }
+    .project-item {
+      border-top: 1px solid var(--rule);
+      padding: 3rem 0;
+      display: grid;
+      grid-template-columns: 0.3fr 1.5fr 1fr;
+      gap: 3vw;
+      align-items: start;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .project-item:last-child { border-bottom: 1px solid var(--rule); }
+    .project-item:hover { background: var(--accent-light); margin: 0 -8vw; padding-left: 8vw; padding-right: 8vw; }
+
+    .project-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      padding-top: 0.25rem;
+    }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.8; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+      color: var(--ink-light);
+      background: var(--cream);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--ink);
+      color: var(--cream);
+      text-align: center;
+      padding: 7rem 8vw;
+    }
+    #contact .section-title { color: var(--white); }
+    #contact .section-num { color: var(--accent); }
+    #contact .section-rule { background: #333; }
+    .contact-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 300;
+      color: var(--white);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.4;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .contact-link {
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #aaa;
+      border-bottom: 1px solid #444;
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid #2a2a2a;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: #555;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 4rem 6vw 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-right { padding: 3rem 6vw 4rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .project-item { grid-template-columns: 1fr; gap: 1rem; }
+      .project-tags { justify-content: flex-start; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="#">Kyle Le</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left fade-in">
+    <p class="hero-eyebrow">Actuarial Studies · University of Melbourne</p>
+    <h1 class="hero-name">Kyle<br><em>Le</em></h1>
+    <p class="hero-desc">
+      Aspiring actuary pursuing a Master of Commerce at the University of Melbourne. 
+      I build pricing models, machine learning classifiers, and insurance analytics tools — 
+      and translate quantitative findings into clear, actionable insights.
+    </p>
+    <a class="hero-cta" href="#projects">View Projects →</a>
+  </div>
+  <div class="hero-right fade-in" style="transition-delay:0.15s">
+    <div class="hero-stat">
+      <span class="stat-num">80</span>
+      <span class="stat-label">WAM · First Class Honours</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">5</span>
+      <span class="stat-label">Actuaries Institute Exemptions</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Actuarial Projects</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">A$25K+</span>
+      <span class="stat-label">Sponsorship Secured as Treasurer</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-body fade-in">
+      <p>
+        I'm an actuarial student at the University of Melbourne, completing my Bachelor of Commerce 
+        (WAM 80, First Class Honours) and transitioning into a Master of Commerce in Actuarial Studies 
+        from March 2026.
+      </p>
+      <p>
+        My work sits at the intersection of actuarial science, statistical modelling, and machine learning. 
+        I'm passionate about pricing, risk quantification, and building analytical tools that bridge 
+        technical rigor with practical business value.
+      </p>
+      <p>
+        Outside of academics, I've held leadership roles as Treasurer and Sponsorship Director of 
+        the International Vietnamese Students Society, and as an Initiative Officer at CAINZ — 
+        developing skills in finance, event management, and stakeholder engagement.
+      </p>
+    </div>
+    <div class="skills-block fade-in" style="transition-delay:0.1s">
+      <div class="skill-row">
+        <div class="skill-lang">Python</div>
+        <div class="skill-tools">pandas · NumPy · PyTorch · matplotlib</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-lang">R</div>
+        <div class="skill-tools">glmnet · Shiny · ggplot2</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-lang">Database</div>
+        <div class="skill-tools">MySQL · relational design · window functions</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-lang">Excel</div>
+        <div class="skill-tools">pivot tables · scenario modelling · chain ladder</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-lang">Actuarial</div>
+        <div class="skill-tools">CB1 · CB2 · CS1 · CS2 · CM1 (CM2 in progress)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="projects-list">
+
+    <div class="project-item fade-in">
+      <span class="project-date">Jan 2026</span>
+      <div>
+        <h3 class="project-title">Car Severity Classification Model</h3>
+        <p class="project-desc">
+          Built a CNN with 8+ layers in PyTorch to classify vehicle damage severity from images. 
+          Converted YOLO-labelled annotations into PyTorch-compatible format, then applied 
+          Batch Normalisation, Residual Blocks, Weight Decay, and Learning Rate scheduling — 
+          lifting prediction accuracy from 40% to 90%.
+        </p>
+      </div>
+      <div class="project-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">CNN</span>
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="project-item fade-in" style="transition-delay:0.05s">
+      <span class="project-date">Sep 2025</span>
+      <div>
+        <h3 class="project-title">Generalised Linear Pricing Model</h3>
+        <p class="project-desc">
+          Developed an interactive RShiny pricing prototype allowing users to input 10+ risk factors 
+          and generate real-time premium estimates in under 1 second. Modelled claim frequency (Poisson) 
+          and severity (Gamma) via GLMs with log links, with full variable selection and residual diagnostics.
+        </p>
+      </div>
+      <div class="project-tags">
+        <span class="tag">R</span>
+        <span class="tag">RShiny</span>
+        <span class="tag">GLM</span>
+        <span class="tag">Insurance Pricing</span>
+      </div>
+    </div>
+
+    <div class="project-item fade-in" style="transition-delay:0.1s">
+      <span class="project-date">Sep 2025</span>
+      <div>
+        <h3 class="project-title">Insurance Loss Ratio Analysis</h3>
+        <p class="project-desc">
+          Designed a normalised MySQL database of synthetic insurance claims across 3 relational tables. 
+          Wrote Python ingestion scripts to load and clean raw CSV data, then conducted SQL analysis — 
+          loss ratio calculations, claim frequency by risk band, and severity ranking via window functions.
+        </p>
+      </div>
+      <div class="project-tags">
+        <span class="tag">MySQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Insurance</span>
+      </div>
+    </div>
+
+    <div class="project-item fade-in" style="transition-delay:0.15s">
+      <span class="project-date">May 2025</span>
+      <div>
+        <h3 class="project-title">California House Value Prediction</h3>
+        <p class="project-desc">
+          Cleaned and analysed 20,000+ housing records, exploring variable distributions and 
+          multicollinearity to validate regression assumptions. Compared linear, polynomial, and GAM 
+          models using 10-fold cross-validation and AIC/BIC criteria — cutting test RMSE from 
+          A$85,000 to A$70,000 (an 18% improvement) on hold-out data.
+        </p>
+      </div>
+      <div class="project-tags">
+        <span class="tag">R</span>
+        <span class="tag">RStudio</span>
+        <span class="tag">Regression</span>
+        <span class="tag">GAM</span>
+        <span class="tag">Cross-Validation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in" style="justify-content:center; border-bottom: none;">
+    <span class="section-num">03</span>
+    <h2 class="section-title" style="color:white;">Get In Touch</h2>
+  </div>
+  <p class="contact-lead fade-in">
+    Open to actuarial internships, graduate roles, and research collaborations.
+  </p>
+  <div class="contact-links fade-in">
+    <a class="contact-link" href="mailto:kylele.work.contact@gmail.com">kylele.work.contact@gmail.com</a>
+    <a class="contact-link" href="https://www.linkedin.com/in/kylele-actuary" target="_blank">LinkedIn</a>
+    <a class="contact-link" href="tel:+61466909628">0466 909 628</a>
+  </div>
+</section>
+
+<footer>© 2026 Kyle Le · Melbourne, VIC</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
